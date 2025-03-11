@@ -23,6 +23,18 @@ return {
     "tpope/vim-fugitive",
   }, lazy = false },
   {
+    "stevearc/dressing.nvim",
+    lazy = false,
+    opts = {},
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("nvchad.configs.lspconfig").defaults()
+      require "configs.lspconfig"
+    end,
+  },
+  {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
