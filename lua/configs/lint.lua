@@ -1,6 +1,8 @@
 require("lint").linters_by_ft = {
   javascript = { "eslint_d" },
   typescript = { "eslint_d" },
+  vue = { "eslint_d" },
+  css = { "stylelint" },
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
