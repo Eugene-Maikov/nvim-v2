@@ -4,6 +4,14 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+-- Trouble
+map("n", "<leader>qq", "<cmd>Trouble diagnostics toggle focus=true<cr>", { desc = "Диагностика (Trouble)" })
+map("n", "<leader>qQ", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Диагностика текущего файла (Trouble)" })
+map("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Список символов (Trouble)" })
+map("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "Определения / ссылки LSP (Trouble)" })
+map("n", "<leader>qL", "<cmd>Trouble loclist toggle<cr>", { desc = "Локальный список (Trouble)" })
+map("n", "<leader>qQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Список исправлений (Trouble)" })
+
 -- Git
 map("n", "<leader>gl", ":Flog<CR>", { desc = "Git лог" })
 map("n", "<leader>gf", ":DiffviewFileHistory<CR>", { desc = "История файла Git" })

@@ -55,13 +55,17 @@ return {
       require "configs.lspconfig"
     end,
   },
-
+  {
+		"folke/trouble.nvim",
+		opts = {},
+		cmd = "Trouble",
+	},
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
   		ensure_installed = {
   			"vim", "lua", "vimdoc",
-       "html", "css"
+       "html", "css", "javascript", "typescript", "vue",
   		},
   	},
   },
