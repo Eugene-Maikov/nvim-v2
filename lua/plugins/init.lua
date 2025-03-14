@@ -62,12 +62,73 @@ return {
 	},
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-  		ensure_installed = {
-  			"vim", "lua", "vimdoc",
-       "html", "css", "javascript", "typescript", "vue",
-  		},
-  	},
+    event = "BufReadPre",
+    config = function()
+      require 'nvim-treesitter.configs'.setup {
+        ensure_installed = {
+          "tsx",
+          "typescript",
+          "javascript",
+          "html",
+          "css",
+          "vue",
+          "astro",
+          "svelte",
+          "gitcommit",
+          "graphql",
+          "json",
+          "json5",
+          "lua",
+          "markdown",
+          "prisma",
+          "vim",
+          "vimdoc",
+        },                             
+        sync_install = false,          
+        ignore_install = { "haskell" },
+        highlight = {
+          enable = true,
+        },
+        indent = {
+          enable = true
+        },
+      }
+    end,
+    dependencies = {
+      "hiphish/rainbow-delimiters.nvim",
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "RRethy/nvim-treesitter-textsubjects",
+    },
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "BufReadPre",
+    config = function()
+      require('nvim-ts-autotag').setup({
+        opts = {
+          enable_close = false,          -- Auto close tags
+          enable_rename = true,          -- Auto rename pairs of tags
+          enable_close_on_slash = true   -- Auto close on trailing </
+        },
+        -- Also override individual filetype configs, these take priority.
+        -- Empty by default, useful if one of the "opts" global settings
+        -- doesn't work well in a specific filetype
+        --[[ per_filetype = {
+            ["html"] = {
+              enable_close = false
+            }
+          } ]]
+      })
+    end
+
+  },
+  {
+    "wurli/contextindent.nvim",
+    -- This is the only config option; you can use it to restrict the files
+    -- which this plugin will affect (see :help autocommand-pattern).
+    opts = { pattern = "*" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
   {
     "Exafunction/codeium.vim",
