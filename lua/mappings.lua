@@ -38,6 +38,10 @@ map("t", "<C-f>", function()
   require("nvchad.term").toggle { pos = "float" }
 end, { desc = "Переключить терминал (плавающий)" })
 
+-- Маппинги для открытия/закрытия всех свёрток
+map('n', 'zR', require('ufo').openAllFolds, { desc = 'Открыть все свёртки' })
+map('n', 'zM', require('ufo').closeAllFolds, { desc = 'Закрыть все свёртки' })
+
 -- Basic
 map('i', 'jj', '<Esc>', { desc = "Выход из режима вставки" })
 map('n', '<leader>q', ':q<CR>', { desc = "Закрыть текущий файл" })

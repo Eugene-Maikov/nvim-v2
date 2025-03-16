@@ -66,21 +66,17 @@ return {
     config = function()
       require 'nvim-treesitter.configs'.setup {
         ensure_installed = {
-          "tsx",
           "typescript",
           "javascript",
           "html",
           "css",
           "vue",
-          "astro",
-          "svelte",
           "gitcommit",
           "graphql",
           "json",
           "json5",
           "lua",
           "markdown",
-          "prisma",
           "vim",
           "vimdoc",
         },                             
@@ -95,7 +91,7 @@ return {
       }
     end,
     dependencies = {
-      "hiphish/rainbow-delimiters.nvim",
+      -- "hiphish/rainbow-delimiters.nvim",
       "JoosepAlviste/nvim-ts-context-commentstring",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "RRethy/nvim-treesitter-textsubjects",
@@ -134,4 +130,24 @@ return {
     "Exafunction/codeium.vim",
     lazy = false,
   },
+  {
+    {
+    'kevinhwang91/nvim-ufo',
+    dependencies = 'kevinhwang91/promise-async',
+    config = function()
+      -- Общие настройки свёртывания
+      vim.o.foldcolumn = '1'
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+
+      -- Настройка провайдера (например, Treesitter + отступы)
+      require('ufo').setup({
+        provider_selector = function(_, _, _)
+          return { 'treesitter', 'indent' }
+        end
+      })
+      end,
+    },
+  }
 }
