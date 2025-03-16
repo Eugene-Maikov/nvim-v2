@@ -46,3 +46,8 @@ vim.opt.fillchars = {
 	foldsep = "│",
 	foldclose = "▸"
 }
+
+vim.notify = require("notify")
+require("notify").setup({
+  background_colour = "#1e1e2e", -- Цвет, который сочетается с твоей темой
+})

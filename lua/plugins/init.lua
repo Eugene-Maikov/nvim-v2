@@ -149,5 +149,39 @@ return {
       })
       end,
     },
-  }
+  },
+  {
+    "folke/noice.nvim",
+    lazy = false,
+        dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    opts = {
+      messages = { enabled = false }, -- Отключить сообщения от noice
+      lsp = {
+        -- переопределить рендеринг markdown, чтобы **cmp** и другие плагины использовали **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = false, -- Отключить конвертацию LSP-ответов в markdown
+          ["vim.lsp.util.stylize_markdown"] = false, -- Отключить стилизацию markdown в LSP-ответах
+          ["cmp.entry.get_documentation"] = true, -- Разрешить cmp использовать noice для отображения документации
+        },
+        progress = {
+          enabled = false, -- Отключить прогресс-бар LSP
+        },
+        hover = {
+          enabled = false, -- Отключить всплывающие подсказки при наведении
+        },
+      },
+      -- можно включить предустановки для упрощения конфигурации
+      presets = {
+        bottom_search = false, -- использовать классическую командную строку внизу для поиска
+        command_palette = true, -- объединить командную строку и меню автодополнения в одном месте
+        long_message_to_split = true, -- длинные сообщения будут отправляться в отдельное окно (split)
+        inc_rename = false, -- отключить диалог переименования для inc-rename.nvim
+        lsp_doc_border = false, -- не добавлять рамку вокруг документов LSP и подсказок функций
+      },
+    }
+
+  },
 }
