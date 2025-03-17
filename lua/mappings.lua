@@ -42,6 +42,11 @@ end, { desc = "Переключить терминал (плавающий)" })
 map('n', 'zR', require('ufo').openAllFolds, { desc = 'Открыть все свёртки' })
 map('n', 'zM', require('ufo').closeAllFolds, { desc = 'Закрыть все свёртки' })
 
+-- vim.keymap.set("n", "<leader>\\", ":vsplit<CR>", { desc = "сплит Вертикальный", noremap = true, silent = true })
+-- vim.keymap.set("n", "<leader>\|", ":split<CR>", { desc = "сплит Горизонтальный", noremap = true, silent = true })
+map('n', '|', ':vsplit<CR>', {desc = "сплит Вертикальный"})
+map('n', '\\', ':split<CR>', {desc = "сплит Горизонтальный"})
+
 -- Basic
 map('i', 'jj', '<Esc>', { desc = "Выход из режима вставки" })
 map('n', '<leader>q', ':q<CR>', { desc = "Закрыть текущий файл" })
