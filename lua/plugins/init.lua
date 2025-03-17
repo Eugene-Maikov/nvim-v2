@@ -92,7 +92,6 @@ return {
     end,
     dependencies = {
       -- "hiphish/rainbow-delimiters.nvim",
-      "JoosepAlviste/nvim-ts-context-commentstring",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "RRethy/nvim-treesitter-textsubjects",
     },
@@ -183,9 +182,12 @@ return {
       },
     },
     config = function()
-      require("noice").setup({
-        background_colour = "#fff",
+      require("noice").setup()
+      -- Настройка nvim-notify для устранения ошибки
+      require("notify").setup({
+        background_colour = "#000000",
       })
+      vim.notify = require("notify")
     end
   },
 }
