@@ -153,7 +153,7 @@ return {
   {
     "folke/noice.nvim",
     lazy = false,
-        dependencies = {
+    dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
@@ -181,7 +181,11 @@ return {
         inc_rename = false, -- отключить диалог переименования для inc-rename.nvim
         lsp_doc_border = false, -- не добавлять рамку вокруг документов LSP и подсказок функций
       },
-    }
-
+    },
+    config = function()
+      require("noice").setup({
+        background_colour = "#fff",
+      })
+    end
   },
 }
