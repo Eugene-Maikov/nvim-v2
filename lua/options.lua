@@ -46,3 +46,5 @@ vim.opt.fillchars = {
 	foldsep = "│",
 	foldclose = "▸"
 }
+
+vim.o.hlsearch = true  -- Подсвечивать результаты поиска
