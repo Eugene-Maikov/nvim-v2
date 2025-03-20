@@ -33,6 +33,8 @@ map_term("<C-f>", "float", "Переключить терминал (плава�
 -- NvimTree
 map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "NvimTree Меню навигации toggle" })
 map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "NvimTree Меню навигации toggle" })
+map('n', '<leader>c', '<cmd>NvimTreeCollapse<CR>', { desc = "NvimTree Сворачивает текущую папку" })
+map('n', '<leader>C', '<cmd>NvimTreeCollapseKeepBuffers<CR>', { desc = "NvimTree Сворачивает все, кроме корня" })
 
 -- Маппинги для открытия/закрытия всех свёрток
 map('n', 'zR', require('ufo').openAllFolds, { desc = 'Открыть все свёртки' })

@@ -7,7 +7,12 @@ require "nvchad.options"
 
 
 -- пользовательские знаки (icons) для диагностики ошибок
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = {
+  Error = "✖",  -- Альтернатива: "⛔", "❌", "🚫"
+  Warn  = "⚠",  -- Альтернатива: "❗", "🔶", "🟠"
+  Hint  = "💡",  -- Альтернатива: "🔍", "✨", "🛈"
+  Info  = "ℹ",  -- Альтернатива: "📘", "🛈", "🔵"
+}
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -42,9 +47,9 @@ vim.opt.fillchars = {
 	eob = " ", -- suppress ~ at EndOfBuffer
 	-- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
 	msgsep = "‾",
-	foldopen = "▾",
+	foldopen = "▼",
 	foldsep = "│",
-	foldclose = "▸"
+	foldclose = "❯"
 }
 
 vim.o.hlsearch = true  -- Подсвечивать результаты поиска
