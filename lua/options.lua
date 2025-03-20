@@ -53,3 +53,15 @@ vim.opt.fillchars = {
 }
 
 vim.o.hlsearch = true  -- Подсвечивать результаты поиска
+
+vim.api.nvim_create_user_command('Dev', function()
+  -- Запускаем npm run dev в терминале
+  vim.cmd('split | term npm run dev')
+  -- Ожидаем несколько секунд, чтобы сервер успел запуститься
+  vim.defer_fn(function()
+    -- Открыть браузер (для macOS), можно поменять на свою команду, например для Linux
+    vim.fn.jobstart("open http://localhost:3000", { detach = true })
+    -- Закрыть терминал после открытия браузера
+    vim.cmd('q')
+  end, 3000)  -- Задержка в миллисекундах, подстрой под себя
+end, {})
