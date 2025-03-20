@@ -32,6 +32,9 @@ vim.opt.mousefocus = true
 -- Буфер обмена
 vim.opt.clipboard = "unnamedplus"
 
+-- Перенос строк в длинной строке
+vim.opt.wrap = true 
+
 -- Отступы
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
@@ -54,14 +57,19 @@ vim.opt.fillchars = {
 
 vim.o.hlsearch = true  -- Подсвечивать результаты поиска
 
-vim.api.nvim_create_user_command('Dev', function()
-  -- Запускаем npm run dev в терминале
-  vim.cmd('split | term npm run dev')
-  -- Ожидаем несколько секунд, чтобы сервер успел запуститься
+local function run_dev(open_browser)
+  -- Запуск npm run dev в скрытом терминале
+  local term_buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_open_term(term_buf, {})
+  vim.fn.jobstart("npm run dev", { detach = true })
+
+  -- Открытие браузера (если нужно) и удаление буфера
   vim.defer_fn(function()
-    -- Открыть браузер (для macOS), можно поменять на свою команду, например для Linux
-    vim.fn.jobstart("open http://localhost:3000", { detach = true })
-    -- Закрыть терминал после открытия браузера
-    vim.cmd('q')
-  end, 3000)  -- Задержка в миллисекундах, подстрой под себя
-end, {})
+    if open_browser then vim.fn.jobstart("open http://localhost:3000", { detach = true }) end
+    vim.api.nvim_buf_delete(term_buf, { force = true })
+  end, 3000)
+end
+
+vim.api.nvim_create_user_command('Dev', function() run_dev(false) end, {})
+vim.api.nvim_create_user_command('Devo', function() run_dev(true) end, {})
+
