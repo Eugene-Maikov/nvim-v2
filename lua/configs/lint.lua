@@ -3,6 +3,7 @@ require("lint").linters_by_ft = {
   typescript = { "eslint_d" },
   vue = { "eslint_d" },
   css = { "stylelint" },
+  scss = { "stylelint" },  -- Добавляем поддержку SCSS
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
