@@ -57,69 +57,14 @@ vim.opt.fillchars = {
 
 vim.o.hlsearch = true  -- Подсвечивать результаты поиска
 
---=============================================================================
--- Проверка, свободен ли порт
-local function is_port_free(port)
-  local handle = io.popen("lsof -i:" .. port)
-  local result = handle:read("*a")
-  handle:close()
-  return result == ""
-end
+-- Подключение модуля с сервером разработки
+local dev_server = require('configs/utils/dev_server')
 
--- Получение следующего доступного порта начиная с заданного
-local function get_next_available_port(start_port)
-  local port = start_port
-  while not is_port_free(port) do
-    port = port + 1
-  end
-  return port
-end
-
--- Запуск локального сервера на указанном порту
-local function run_dev(open_browser, custom_port)
-  local port = custom_port or 3000
-
-  -- Запуск npm run dev на найденном порту
-  local term_buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_open_term(term_buf, {})
-  vim.fn.jobstart("npm run dev -- --port=" .. port, { detach = true })
-
-  -- Уведомление до открытия браузера
-  vim.defer_fn(function()
-    -- Информирование о запуске локального сервера
-    vim.notify("Локальный сервер запущен на http://localhost:" .. port, vim.log.levels.INFO)
-
-    -- Открытие браузера (если нужно)
-    if open_browser then
-      vim.fn.jobstart("open http://localhost:" .. port, { detach = true })
-    end
-    
-    vim.api.nvim_buf_delete(term_buf, { force = true })
-  end, 3000)
-end
-
--- Запуск сервера на доступном порту начиная с 3000
+-- Команда для запуска сервера
 vim.api.nvim_create_user_command('Dev', function()
-  local next_port = get_next_available_port(3000)
-  run_dev(true, next_port)
+  local next_port = dev_server.get_next_available_port(3000)
+  dev_server.run_dev(true, next_port)
 end, {})
-
---=============================================================================
--- Завершение процесса на указанном порту
-local function kill_port(port)
-  local handle = io.popen("lsof -ti tcp:" .. port)
-  local result = handle:read("*a")
-  handle:close()
-
-  -- Если процесс найден, завершаем его
-  if result ~= "" then
-    vim.fn.jobstart("lsof -ti tcp:" .. port .. " | xargs kill", { detach = true })
-    vim.notify("Процесс на порту " .. port .. " закрыт", vim.log.levels.INFO)
-  else
-    -- Если порт не занят
-    vim.notify("Порт " .. port .. " не занят", vim.log.levels.INFO)
-  end
-end
 
 -- Команда для завершения всех процессов node
 vim.api.nvim_create_user_command('DK', function()
@@ -131,33 +76,13 @@ end, {})
 vim.api.nvim_create_user_command('DKP', function(opts)
   local port = opts.args
   if port and tonumber(port) then
-    kill_port(port)
+    dev_server.kill_port(port)
   else
     vim.notify("Неверный номер порта", vim.log.levels.ERROR)
   end
 end, { nargs = 1 })
 
---=============================================================================
--- Получение списка занятых портов 3000
+-- Команда для получения списка занятых портов
 vim.api.nvim_create_user_command('DL', function()
-  -- Используем lsof для поиска процессов на портах 3000
-  local handle = io.popen("lsof -i -P -n | grep LISTEN | grep ':300' | awk -F: '{print $2}' | awk '{print $1}'")
-  local result = handle:read("*a")
-  handle:close()
-
-  -- Если порты заняты, выводим их
-  if result ~= "" then
-    vim.notify("Занятые порты: " .. result, vim.log.levels.INFO)
-  else
-    vim.notify("Нет занятых портов", vim.log.levels.INFO)
-  end
+  dev_server.list_ports()
 end, {})
-
---=============================================================================
--- Весь функционал сгруппирован в команде и оптимизирован для удобства
--- Только для 3000 портов
-
--- DevList - список занятых портов
--- DK (DevsKill) - закрыть все порты
--- DKP (DevsKillPort 3000) -- закрыть порт по номеру
--- Dev - запустить и перейти в браузер
