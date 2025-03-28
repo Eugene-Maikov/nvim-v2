@@ -56,6 +56,11 @@ vim.opt.fillchars = {
 }
 
 vim.o.hlsearch = true  -- Подсвечивать результаты поиска
+vim.o.showtabline = 2 -- Всегда показывать табы
+
+-- Орфограция
+vim.opt.spell = true
+vim.opt.spelllang = "en,ru"
 
 -- Подключение модуля с сервером разработки
 local dev_server = require('configs/utils/dev_server')
