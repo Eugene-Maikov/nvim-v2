@@ -116,6 +116,8 @@ return {
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
 
+      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+
       -- Настройка провайдера (например, Treesitter + отступы)
       require('ufo').setup({
         provider_selector = function(_, _, _)

@@ -44,16 +44,17 @@ vim.opt.softtabstop = 2
 vim.opt.scrolloff = 8
 vim.opt.wrap = false
 vim.opt.termguicolors = true
-vim.opt.fillchars = {
-	vert = "│",
-	fold = "⠀",
-	eob = " ", -- suppress ~ at EndOfBuffer
-	-- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
-	msgsep = "‾",
-	foldopen = "▼",
-	foldsep = "│",
-	foldclose = "❯"
-}
+-- vim.opt.fillchars = {
+-- 	vert = "│",
+-- 	fold = "⠀",
+-- 	eob = " ", -- suppress ~ at EndOfBuffer
+-- 	-- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+-- 	msgsep = "‾",
+-- 	foldopen = "▼",
+-- 	foldsep = "│",
+-- 	foldclose = "❯"
+-- }
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 vim.o.hlsearch = true  -- Подсвечивать результаты поиска
 vim.o.showtabline = 2 -- Всегда показывать табы
