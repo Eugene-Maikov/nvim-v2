@@ -168,4 +168,15 @@ return {
       vim.notify = require("notify")
     end
   },
+  {
+    "wurli/visimatch.nvim",
+    config = function()
+      require("visimatch").setup({
+        chars_lower_limit = 3,
+        hl_group = "Visual",
+        autostart = true,
+      })
+    end,
+    event = "VeryLazy",
+  },
 }

@@ -70,10 +70,10 @@ map("n", "<leader>4", "4gt", opts) -- Перейти к вкладке 4
 map("n", "<leader>5", "5gt", opts) -- Перейти к вкладке 5
 
 -- Перемещение строк
-vim.keymap.set('n', '<Down>', ':m .+1<CR>==', { desc = 'Перемещение строк Вниз' })
-vim.keymap.set('n', '<Up>', ':m .-2<CR>==', { desc = 'Перемещение строк Вверх' })
-vim.keymap.set('v', '<Down>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.keymap.set('v', '<Up>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader><Down>', ':m .+1<CR>==', { desc = 'Перемещение строк Вниз' })
+vim.keymap.set('n', '<leader><Up>', ':m .-2<CR>==', { desc = 'Перемещение строк Вверх' })
+vim.keymap.set('v', '<leader><Down>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set('v', '<leader><Up>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")o
