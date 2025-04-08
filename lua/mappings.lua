@@ -75,5 +75,11 @@ map('n', '<leader><Up>', ':m .-2<CR>==', { desc = 'Перемещение стр
 map('v', '<leader><Down>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 map('v', '<leader><Up>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
+-- Git Shortcuts
+vim.cmd [[
+  command! Ga Git add .
+  command! Gc Git commit
+  command! Gp Git push
+]]
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")o
