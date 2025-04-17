@@ -4,6 +4,7 @@ require("lint").linters_by_ft = {
   vue = { "eslint_d" },
   css = { "stylelint" },
   scss = { "stylelint" },  -- Добавляем поддержку SCSS
+  html = { "eslint_d" },  -- Добавляем HTML
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
