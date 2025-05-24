@@ -3,10 +3,10 @@ local options = {
     lua = { "stylua" },
     css = { "stylelint" },
     scss = { "stylelint" },
-    javascript = { "eslint_d", "prettier" },
-    typescript = { "eslint_d", "prettier" },
-    vue = { "eslint_d", "prettier" },
-    html = { "prettier" },  -- Используем Prettier для HTML
+    javascript = { "eslint_d" },
+    typescript = { "eslint_d" },
+    vue = { "eslint_d" },
+    html = { "prettier" },
   },
 
   format_on_save = {
@@ -17,7 +17,7 @@ local options = {
 
 -- Автоформатирование при сохранении
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.lua", "*.js", "*.ts", "*.vue", "*.css", "*.scss", "*.html" },  -- Добавляем HTML
+  pattern = { "*.lua", "*.js", "*.ts", "*.vue", "*.css", "*.scss", "*.html" },
   callback = function()
     require("conform").format({ async = false, lsp_fallback = true })
   end,
